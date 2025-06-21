@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loan Calculator | Sales Advisor</title>
+  <meta name="description" content="Kira pinjaman kereta dengan mudah. Sesuai untuk Sales Advisor bantu pelanggan buat keputusan.">
+  <meta property="og:title" content="Loan Calculator | Sales Advisor" />
+  <meta property="og:description" content="Kalkulator pinjaman kereta interaktif untuk Sales Advisor dan pelanggan." />
+  <meta property="og:image" content="https://i.imgur.com/qTgJl7b.png" />
+  <meta property="og:url" content="https://yourusername.github.io/loan-calculator/" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(to bottom, #1a1a1a, #000);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-bottom: 1.5em;
+    }
+
+    .calculator {
+      max-width: 400px;
+      margin: auto;
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #f39c12;
+      color: #111;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #d35400;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: #2ecc71;
+    }
+
+    .cta {
+      display: block;
+      margin: 30px auto;
+      background: #27ae60;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 30px;
+      text-align: center;
+      text-decoration: none;
+      max-width: 300px;
+    }
+
+    .cta:hover {
+      background: #1e8449;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+
+    #popup {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #f39c12;
+      color: #000;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      display: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Kalkulator Loan Kereta</h1>
+  <p>Sales Advisor boleh bantu pelanggan kira anggaran bayaran bulanan pinjaman kereta.</p>
+</header>
+
+<div class="calculator">
+  <label>Jumlah Pinjaman (RM):</label>
+  <input type="number" id="amount" placeholder="Contoh: 50000">
+
+  <label>Kadar Faedah Tahunan (%):</label>
+  <input type="number" id="interest" placeholder="Contoh: 3.5">
+
+  <label>Tempoh Pinjaman (Tahun):</label>
+  <input type="number" id="years" placeholder="Contoh: 7">
+
+  <button onclick="calculateLoan()">Kira Sekarang</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<a class="cta" href="https://wa.me/60178877475?text=SA+Loan+Calculator">Hubungi Saya di WhatsApp</a>
+
+<footer>
+  &copy; 2025 Loan Calculator Sales Advisor. Hak cipta terpelihara.
+</footer>
+
+<div id="popup">S****k baru sahaja gunakan kalkulator ini!</div>
+
+<script>
+  function calculateLoan() {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const interest = parseFloat(document.getElementById("interest").value) / 100 / 12;
+    const years = parseFloat(document.getElementById("years").value);
+    const months = years * 12;
+
+    const x = Math.pow(1 + interest, months);
+    const monthly = (amount * x * interest) / (x - 1);
+
+    if (!isNaN(monthly)) {
+      document.getElementById("result").innerHTML = "Anggaran Bulanan: RM " + monthly.toFixed(2);
+    } else {
+      document.getElementById("result").innerHTML = "Sila lengkapkan semua medan.";
+    }
+  }
+
+  const names = ["Siti", "Ali", "Aisyah", "Aiman", "Saiful", "Zahra", "Rizal", "Hassan", "Mira", "Kamal"];
+  function showPopup() {
+    const popup = document.getElementById("popup");
+    const name = names[Math.floor(Math.random() * names.length)];
+    const hour = Math.floor(Math.random() * 5) + 1;
+    popup.textContent = `${name.charAt(0)}**** telah gunakan kalkulator ini ${hour} jam yang lalu`;
+    popup.style.display = "block";
+    setTimeout(() => popup.style.display = "none", 5000);
+  }
+
+  setInterval(showPopup, 10000);
+</script>
+
+</body>
+</html>
